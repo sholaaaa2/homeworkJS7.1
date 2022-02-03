@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Виселеца</title>
+</head>
+<body>
+
+
+  <script type="text/javascript">
+
+    let words = ["собака","кошка","свинья","горила","мама","кольцо","дерево","свадьба","смерть","кальян","пальма","гибрид","стоматолог","окулист","окунь","ящерица","талант","бой","мастер","орган","вагон","статус","проверка","испытание","страница","шея","звук","определение","вода","диван","вооружение","спектакль","библиотека","список","рассказ","автомат","поэзия","количество","кофе"];
+
+    let word = words[Math.floor(Math.random()*words.length)];
+
+    let randAnswer = [];
+    for (let i = 0; i < word.length; i++) {
+      randAnswer[i] = "_";
+    }
+    let tryes = 10;
+
+    let remainLetter = word.length;
+
+    while (remainLetter > 0 && tryes > 0) {
+      alert(randAnswer.join(" ") + " Количество попыток: "+ tryes);
+      let guess = prompt("Введите букву");
+
+      if (guess === null) {
+        break
+      }
+      else if (guess.length !== 1) {
+        alert("Введите одну букву")
+      }
+      else {
+        guess = guess.toLowerCase();
+        for (let j = 0; j < word.length; j++) {
+          if (word[j] === guess && randAnswer[j] === "_") {
+            randAnswer[j] = guess;
+            remainLetter--
+          }
+        };
+
+        let evn = (item) => item === guess;
+        if (!randAnswer.some(evn)) {
+          tryes--
+        }
+        else {
+          continue
+        }
+      }
+    }
+
+    alert("Правильное слово: "+word);
+    if (remainLetter > 0 && tryes > 0) {
+      alert("Вы вышли из игры")
+    }
+    else if (tryes===0) {
+      alert("Вы проиграли")
+    }
+    else {
+      alert("Вы выграли")
+    }
+
+  </script>
+</body>
+</html>
